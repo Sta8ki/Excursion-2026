@@ -5,17 +5,17 @@
 
 class Person {
 public:
-    Person(const std::string& person_name, const std::string& person_phone);
+    Person(const std::string& person_name, const std::string& person_email);
     virtual ~Person() = default;
 
     virtual void print_info() const;
 
     std::string get_name() const;
-    std::string get_phone() const;
+    std::string get_email() const;
 
 protected:
     std::string name;
-    std::string phone;
+    std::string email;
 };
 
 #endif

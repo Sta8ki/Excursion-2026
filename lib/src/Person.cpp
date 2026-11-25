@@ -1,17 +1,18 @@
 #include "Person.h"
+
 #include <iostream>
 
-Person::Person(const std::string& person_name, const std::string& person_phone)
-    : name(person_name), phone(person_phone) {}
+Person::Person(const std::string& person_name, const std::string& person_email)
+    : name(person_name), email(person_email) {}
 
-    void Person::print_info() const {
-        std::cout << name << " (" << phone << ")" << std::endl;
-    }
+void Person::print_info() const {
+    std::cout << name << " (" << email << ")" << std::endl;
+}
 
 std::string Person::get_name() const {
     return name;
 }
 
-std::string Person::get_phone() const {
-    return phone;
+std::string Person::get_email() const {
+    return email;
 }

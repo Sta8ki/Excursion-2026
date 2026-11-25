@@ -1,8 +1,9 @@
-add_library(ExcursionLibrary
+add_library(ConferenceLibrary
     src/Person.cpp
-    src/Tourist.cpp
-    src/Guide.cpp
+    src/Participant.cpp
+    src/StudentParticipant.cpp
+    src/SpeakerParticipant.cpp
 )
-target_include_directories(ExcursionLibrary PUBLIC
+target_include_directories(ConferenceLibrary PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
