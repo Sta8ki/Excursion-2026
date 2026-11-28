@@ -43,3 +43,44 @@ bool Registration::pay(double amount) {
     }
     return true;
 }
+
+bool Registration::confirm() {
+    if (status == RegistrationStatus::REGISTERED) {
+        return fail("the registration cannot be confirmed before the payment.");
+    }
+    if (status != RegistrationStatus::PAID) {
+        return fail("confirmation is possible only after the payment.");
+    }
+    change_status(RegistrationStatus::CONFIRMED);
+    std::cout << "Registration #" << id << " is confirmed." << std::endl;
+    return true;
+}
+
+bool Registration::issue_badge() {
+    if (status != RegistrationStatus::CONFIRMED) {
+        return fail("the badge can be issued only for a confirmed registration.");
+    }
+    badge_number = "BADGE-" + std::to_string(conference->get_id()) + "-" + std::to_string(id);
+    change_status(RegistrationStatus::BADGE_ISSUED);
+    std::cout << "Badge " << badge_number << " issued to " << participant->get_name() << "." << std::endl;
+    return true;
+}
+
+bool Registration::mark_attended() {
+    if (status != RegistrationStatus::BADGE_ISSUED) {
+        return fail("attendance can be marked only after the badge is issued.");
+    }
+    change_status(RegistrationStatus::ATTENDED);
+    std::cout << participant->get_name() << " is marked as present." << std::endl;
+    return true;
+}
+
+bool Registration::issue_certificate() {
+    if (status != RegistrationStatus::ATTENDED) {
+        return fail("the certificate can be issued only after attendance is marked.");
+    }
+    change_status(RegistrationStatus::CERTIFIED);
+    std::cout << participant->certificate_title() << " issued to "
+              << participant->get_name() << "." << std::endl;
+    return true;
+}
